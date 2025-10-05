@@ -1,0 +1,637 @@
+{
+    "result": {
+        "devcloud.pipeline.plugin.sourcecode": {
+            "data": [
+                {
+                    "id": 1395,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "github",
+                        "displayName": "github Repos",
+                        "dataSourceBindings": [
+                            {
+                                "target": "repo",
+                                "endpointId": "GitHubRepos",
+                                "dataSourceName": "GetRepos",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "branch",
+                                "endpointId": "GitHubRepos",
+                                "dataSourceName": "GetBranch",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            }
+                        ],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GitHubRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-github.github-token"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the GitHub endpoint to use."
+                            },
+                            {
+                                "name": "repo",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Repository",
+                                "defaultValue": ""
+                            },
+                            {
+                                "name": "branch",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Branch",
+                                "defaultValue": ""
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-github/1.0.24",
+                    "module_id": "devcloud2018.codesource-authenticate-github.Task_Trigger_EndpointTasks",
+                    "description": "GitHub repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "GitHub repository",
+                    "version": "1.0.24",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-github/1.0.24",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 11580,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "gitee",
+                        "displayName": "Gitee Repos",
+                        "dataSourceBindings": [
+                            {
+                                "target": "repo",
+                                "endpointId": "GiteeRepos",
+                                "dataSourceName": "GetRepos",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "branch",
+                                "endpointId": "GiteeRepos",
+                                "dataSourceName": "GetBranch",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "tag",
+                                "endpointId": "GiteeRepos",
+                                "dataSourceName": "GetTags",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "commit",
+                                "endpointId": "GiteeRepos",
+                                "dataSourceName": "GetCommits",
+                                "resultTemplate": {
+                                    "value": "sha",
+                                    "displayName": "sha"
+                                }
+                            }
+                        ],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GiteeRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-gitee.oauth01"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the gitee endpoint to use."
+                            },
+                            {
+                                "name": "repo",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Repository",
+                                "defaultValue": ""
+                            },
+                            {
+                                "name": "branch",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Branch",
+                                "defaultValue": ""
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-gitee/1.0.23",
+                    "module_id": "devcloud2018.codesource-authenticate-gitee.Task_Trigger_EndpointTasks",
+                    "description": "Gitee",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Gitee",
+                    "version": "1.0.23",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-gitee/1.0.23",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 377200,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "gerrit",
+                        "displayName": "gerrit Repos",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GerritRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-gerrit-24.oauth07"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the gerrit endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-gerrit-24/1.0.9",
+                    "module_id": "devcloud2018.codesource-gerrit-24.Task_Trigger_EndpointTasks",
+                    "description": "Gerrit repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Gerrit repository",
+                    "version": "1.0.9",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-gerrit-24/1.0.9",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 463401,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "gitlab",
+                        "displayName": "gitlab Repos",
+                        "dataSourceBindings": [
+                            {
+                                "target": "userId",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetUserId",
+                                "resultTemplate": {
+                                    "value": "id",
+                                    "displayName": "id"
+                                }
+                            },
+                            {
+                                "target": "repo",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetRepos",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "branch",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetBranch",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            }
+                        ],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GitLabRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-gitlab-37.oauth03"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the gitlab endpoint to use."
+                            },
+                            {
+                                "name": "repo",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Repository",
+                                "defaultValue": ""
+                            },
+                            {
+                                "name": "branch",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Branch",
+                                "defaultValue": ""
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-gitlab-37/1.0.18",
+                    "module_id": "devcloud2018.codesource-gitlab-37.Task_Trigger_EndpointTasks",
+                    "description": "GitLab repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "GitLab repository",
+                    "version": "1.0.18",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-gitlab-37/1.0.18",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 468754,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "tfs_git",
+                        "displayName": "generic Repos",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GenericRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-tfs.oauth07"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the generic endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-tfs/1.0.28",
+                    "module_id": "devcloud2018.codesource-authenticate-tfs.Task_Trigger_EndpointTasks",
+                    "description": "TFS Git repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "TFS Git repository",
+                    "version": "1.0.28",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-tfs/1.0.28",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 470373,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "gitcode",
+                        "displayName": "gitcode",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GenericRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-gitcode.oauth377"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the generic endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-gitcode/1.2.9",
+                    "module_id": "devcloud2018.codesource-authenticate-gitcode.Task_Trigger_EndpointTasks",
+                    "description": "oauth gitcode",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "gitcode",
+                    "version": "1.2.9",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-gitcode/1.2.9",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 470893,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "general_git",
+                        "displayName": "generic Repos",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GenericRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-generic.oauth02"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the generic endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-generic/1.0.26",
+                    "module_id": "devcloud2018.codesource-authenticate-generic.Task_Trigger_EndpointTasks",
+                    "description": "Git repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Git repository",
+                    "version": "1.0.26",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-generic/1.0.26",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 477460,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "custom_gitlab",
+                        "displayName": "gitlab Repos",
+                        "dataSourceBindings": [
+                            {
+                                "target": "userId",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetUserId",
+                                "resultTemplate": {
+                                    "value": "id",
+                                    "displayName": "id"
+                                }
+                            },
+                            {
+                                "target": "repo",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetRepos",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            },
+                            {
+                                "target": "branch",
+                                "endpointId": "GitLabRepos",
+                                "dataSourceName": "GetBranch",
+                                "resultTemplate": {
+                                    "value": "name",
+                                    "displayName": "name"
+                                }
+                            }
+                        ],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "GitLabRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-self-managed-gitlab-37.oauth03"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the gitlab endpoint to use."
+                            },
+                            {
+                                "name": "repo",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Repository",
+                                "defaultValue": ""
+                            },
+                            {
+                                "name": "branch",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "Select"
+                                },
+                                "label": "Branch",
+                                "defaultValue": ""
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-self-managed-gitlab-37/1.0.10",
+                    "module_id": "devcloud2018.codesource-self-managed-gitlab-37.Task_Trigger_EndpointTasks",
+                    "description": "Self-Managed GitLab repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Self-Managed GitLab repository",
+                    "version": "1.0.10",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-self-managed-gitlab-37/1.0.10",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 480629,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "bitbucket",
+                        "displayName": "bitbucket Repos",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "BitbucketRepos",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-authenticate-bitbucket.oauth02"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the bitbucket endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-bitbucket/1.0.8",
+                    "module_id": "devcloud2018.codesource-authenticate-bitbucket.Task_Trigger_EndpointTasks",
+                    "description": "Bitbucket repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Bitbucket repository",
+                    "version": "1.0.8",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-bitbucket/1.0.8",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 480862,
+                    "type": "Task",
+                    "location": "devcloud.pipeline.plugin.sourcecode",
+                    "properties": {
+                        "name": "CodeArts Repo HTTPS",
+                        "displayName": "CodeArts Repo HTTPS",
+                        "dataSourceBindings": [],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.yml",
+                                "entrance": "main.yml"
+                            }
+                        },
+                        "parameters": [
+                            {
+                                "name": "CodehubHttps",
+                                "displaySettings": {
+                                    "DevCloud.ControlType": "EndPoint:devcloud2018.codesource-codehub-https-24.oauth07"
+                                },
+                                "label": "Endpoint",
+                                "placeHolder": "",
+                                "required": "true",
+                                "helpText": "Select the gerrit endpoint to use."
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-codehub-https-24/1.0.18",
+                    "module_id": "devcloud2018.codesource-codehub-https-24.Task_Trigger_EndpointTasks",
+                    "description": "CodeArts Repo HTTPS",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "CodeArts Repo HTTPS",
+                    "version": "1.0.18",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-codehub-https-24/1.0.18",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                }
+            ],
+            "total": 10
+        }
+    },
+    "status": "success",
+    "error": null
+}

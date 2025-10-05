@@ -1,0 +1,1623 @@
+{
+    "result": {
+        "devcloud.open.endpoint": {
+            "data": [
+                {
+                    "id": 1394,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "GitHub",
+                        "name": "github",
+                        "url": {
+                            "displayName": "GitHub Url",
+                            "value": "https://api.github.com",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection",
+                                "endpointUrl": "{{endpoint.url}}/user/repos"
+                            },
+                            {
+                                "name": "GetRepos",
+                                "endpointUrl": "{{endpoint.url}}/user/repos?page=1&per_page=100",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetBranch",
+                                "endpointUrl": "{{endpoint.url}}/repos/{{repo_owner}}/{{repo}}/branches?page=1&per_page=100",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetReposV2",
+                                "endpointUrl": "{{endpoint.url}}/user/repos?page={{page}}&per_page={{per_page}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-oauth2",
+                                "scheme": "oauth2",
+                                "displayName": "OAuth",
+                                "parameters": [
+                                    {
+                                        "label": "OAuth2",
+                                        "name": "access_token_id",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "AuthDialog",
+                                            "DevCloud.ControlType.Secret": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "endpoint-auth-scheme-access-token",
+                                "scheme": "access-token",
+                                "displayName": "Access token",
+                                "parameters": [
+                                    {
+                                        "label": "Access Token(The account must have the repository administrator permissions to configure trigger events.)",
+                                        "name": "access_token",
+                                        "helpText": "Github access token.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a GitHub repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services.<br>[Learn more](https://support.huaweicloud.com/intl/en-us/usermanual-pipeline/pipeline_01_0011.html#section6)"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-github/1.0.24",
+                    "module_id": "devcloud2018.codesource-authenticate-github.github-token",
+                    "description": "GitHub repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "GitHub repository",
+                    "version": "1.0.24",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-github/1.0.24",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 1403,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "endponit",
+                        "displayName": "Kubernetes",
+                        "url": {
+                            "displayName": "Kubernetes URL",
+                            "helpText": "Enter the cluster server address in the kubeconfig file. e.g. https://100.xxx.xxx.43:5443"
+                        },
+                        "dataSources": [
+                            {
+                                "name": "Test",
+                                "endpointUrl": "{{endpoint.url}}version",
+                                "resultSelector": "jsonpath:$.goVersion"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "id": "kubeconfig",
+                                "type": "endpoint-auth-scheme-k8s",
+                                "displayName": "KubeConfig",
+                                "scheme": "KubeConfig",
+                                "parameters": [
+                                    {
+                                        "name": "kubeconfig",
+                                        "label": "Kubeconfig",
+                                        "description": "Copy and paste contents of kubectl config",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "MultiLineText",
+                                            "DevCloud.ControlType.Secret": true
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "parameters": [],
+                        "helpText": "Connects to a Kubernetes cluster. Bind a public IP address to the cluster if your Deploy executor is from the official resource pool."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/deploy_k8s_connection/2.2.38",
+                    "module_id": "devcloud2018.deploy_k8s_connection.endponit",
+                    "description": "deploy_k8s_connection",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "deploy_k8s_connection",
+                    "version": "2.2.38",
+                    "tags": [
+                        "kubernetes",
+                        "docker"
+                    ],
+                    "url_relative": "extensions/devcloud2018/deploy_k8s_connection/2.2.38",
+                    "target": null,
+                    "categories": [
+                        "endpoint",
+                        "deploy"
+                    ]
+                },
+                {
+                    "id": 1413,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "nexus repository",
+                        "helpMarkdown": "An endpoint used to connect to a third-party private Maven repository that can be used in Build. [Learn more](https://support.huaweicloud.com/intl/en-us/usermanual-pipeline/pipeline_01_0011.html#section4)",
+                        "url": {
+                            "displayName": "Url",
+                            "hidden": true,
+                            "value": "https://www.huaweicloud.com/"
+                        },
+                        "headers": {
+                            "Content-Type": "application/json;charset=utf-8"
+                        },
+                        "dataSources": [
+                            {
+                                "name": "nexusConnection",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-nexus",
+                                "scheme": "endpoint-auth-scheme-nexus",
+                                "parameters": [
+                                    {
+                                        "name": "nexusUrl",
+                                        "label": "Repository URL",
+                                        "description": "Enter a repository URL.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "pattern": "^((https|http):\\/\\/)[^\\s]+$",
+                                            "patternDescription": "Invalid repository URL. The repository URL must start with https: or http:.",
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "nexusUserName",
+                                        "label": "Username",
+                                        "description": "Enter a username.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "nexusPassWord",
+                                        "label": "Password",
+                                        "description": "Enter a password.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codeci_endpoint_nexus/20240630.1",
+                    "module_id": "devcloud2018.codeci_endpoint_nexus.nexusEndpoint",
+                    "description": "Nexus Repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "nexus repository",
+                    "version": "20240630.1",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codeci_endpoint_nexus/20240630.1",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 1422,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "RemoteJobs",
+                        "displayName": "Jenkins",
+                        "url": {
+                            "displayName": "Server URL",
+                            "helpMarkDown": "接口地址，如http://xx.com/api/v1/list",
+                            "value": "",
+                            "helpText": "Example: https://*.*.*.*:8080.",
+                            "validation": {
+                                "pattern": "^(https?)://([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?<!172\\.(16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31))(?<!127)(?<!10)(?<!^10)(?<!^0)\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?<!192\\.168)(?<!172\\.(16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31))\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?<!\\.255$)(:|/).*|https?://(([\\da-fA-F]{0,4}:){7}[\\da-fA-F]{0,4}|:((:[\\da−fA−F]1,4)1,6|:)).*$",
+                                "patternDescription": "Enter the Jenkins address in IP format. Domain names are not supported. For example, https://xxxx:xxx/jenkins."
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "SelectListDataSource",
+                                "endpointUrl": "{{endpoint.url}}/api/json",
+                                "resultSelector": "jsonpath:$.jobs[*]['name','color']"
+                            }
+                        ],
+                        "execution": {
+                            "ansible": {
+                                "target": "roles/main.sh",
+                                "entrance": "main.sh"
+                            }
+                        },
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "Basic Authentication",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Jenkins username.",
+                                        "description": "jenkins username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "helpText": "Jenkins password.",
+                                        "description": "jenkins password for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a third-party Jenkins service, which can be used in the pipeline.[Learn more](https://support.huaweicloud.com/intl/en-us/usermanual-pipeline/pipeline_01_0011.html#section2)"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/jenkins_endpoint_jobs/1.0.34",
+                    "module_id": "devcloud2018.jenkins_endpoint_jobs.Jenkins-EndPoint-market",
+                    "description": "jenkins_task",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "jenkins task",
+                    "version": "1.0.34",
+                    "tags": [
+                        "JenkinsTask"
+                    ],
+                    "url_relative": "extensions/devcloud2018/jenkins_endpoint_jobs/1.0.34",
+                    "target": null,
+                    "categories": [
+                        "pipeline"
+                    ]
+                },
+                {
+                    "id": 11579,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "Gitee",
+                        "name": "gitee",
+                        "url": {
+                            "displayName": "Gitee Url",
+                            "value": "https://gitee.com",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/user/repos"
+                            },
+                            {
+                                "name": "GetRepos",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/user/repos?page=1&per_page=100",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetReposByPage",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/user/repos?page={{page}}&per_page={{per_page}}&q={{search_key}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetBranch",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/repos/{{repo_owner}}/{{repo}}/branches",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetTags",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/repos/{{repo_owner}}/{{repo}}/tags",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetCommits",
+                                "endpointUrl": "{{endpoint.url}}/api/v5/repos/{{repo_owner}}/{{repo}}/commits?sha={{branch}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-oauth2",
+                                "scheme": "oauth2",
+                                "displayName": "OAuth",
+                                "parameters": [
+                                    {
+                                        "label": "OAuth2",
+                                        "name": "access_token_id",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "AuthDialog",
+                                            "DevCloud.ControlType.Secret": true
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "endpoint-auth-scheme-access-token",
+                                "scheme": "access-token",
+                                "displayName": "Access token",
+                                "parameters": [
+                                    {
+                                        "label": "Access Token(The account must have the repository administrator permissions to configure trigger events.)",
+                                        "name": "access_token",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "Connect to Gitee, can be used in CodeArts Pipeline, CodeArts Build and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-gitee/1.0.23",
+                    "module_id": "devcloud2018.codesource-authenticate-gitee.oauth01",
+                    "description": "Gitee",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Gitee",
+                    "version": "1.0.23",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-gitee/1.0.23",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 115845,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "RemoteJobs",
+                        "displayName": "Guanyuntai扩展点",
+                        "url": {
+                            "displayName": "Server URL",
+                            "value": "http://27.115.3.108:11159/devops/devcloudDeployUi/tdcc",
+                            "validation": {
+                                "pattern": "^.*$",
+                                "patternDescription": "Enter a public IP address, for example: https://100.100.145.11:8443/jenkins"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection",
+                                "endpointUrl": "{{endpoint.url}}/tenants",
+                                "resultSelector": "jsonpath:$.data[*]"
+                            },
+                            {
+                                "name": "listTenants",
+                                "endpointUrl": "{{endpoint.url}}/tenants",
+                                "resultSelector": "jsonpath:$.data[*]"
+                            },
+                            {
+                                "name": "listProjects",
+                                "endpointUrl": "{{endpoint.url}}/tenants/{{tenant.value}}/projects",
+                                "resultSelector": "jsonpath:$.data[*]"
+                            },
+                            {
+                                "name": "listApplications",
+                                "endpointUrl": "{{endpoint.url}}//tenants/{{tenant.value}}/projects/{{project.value}}/deploys?namespace={{namespaceAlias.value}}",
+                                "resultSelector": "jsonpath:$.data[*]"
+                            },
+                            {
+                                "name": "listImageName",
+                                "endpointUrl": "{{endpoint.url}}/tenants/{{tenant.value}}/projects/{{project.value}}/repositories/images?isPublic=false",
+                                "resultSelector": "jsonpath:$.data.private[*]"
+                            },
+                            {
+                                "name": "listImageVersion",
+                                "endpointUrl": "{{endpoint.url}}/tenants/{{tenant.value}}/projects/{{project.value}}/repositories/images?isPublic=false",
+                                "resultSelector": "jsonpath:$.data.private[?(@.repository=='{{image_url.value}}')].repositoryDetial[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-guanyuntai",
+                                "scheme": "UsernamePassword",
+                                "displayName": "Basic Authentication",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "description": "guanyuntai username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "description": "guanyuntai password for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a third-party Jenkins service, which can be used in CloudPipeline, CloudBuild, and other services.<br>[Learn more](https://support.huaweicloud.com/usermanual-pipeline/pipeline_01_0011.html#section1)"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/guanyuntaiAuth/1.0.24",
+                    "module_id": "devcloud2018.guanyuntaiAuth.Guanyuntai-EndPoint-market",
+                    "description": "guanyuntai扩展点",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "guanyuntai扩展点",
+                    "version": "1.0.24",
+                    "tags": [
+                        "extend",
+                        "guanyuntai"
+                    ],
+                    "url_relative": "extensions/devcloud2018/guanyuntaiAuth/1.0.24",
+                    "target": null,
+                    "categories": [
+                        "deploy"
+                    ]
+                },
+                {
+                    "id": 176217,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "endponit",
+                        "displayName": "IAM user",
+                        "helpText": "Service endpoint for privilege escalation based on the configured user. [Learn more](https://support.huaweicloud.com/en-us/usermanual-pipeline/pipeline_01_0011.html#section9)",
+                        "url": {
+                            "displayName": "iam Url",
+                            "value": "https://iam.cn-north-7.ulanqab.huawei.com",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "Test",
+                                "endpointUrl": "{{endpoint.url}}/v3/auth/domains"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "id": "aksk",
+                                "type": "endpoint-auth-scheme-aksk",
+                                "displayName": "aksk",
+                                "scheme": "aksk",
+                                "parameters": [
+                                    {
+                                        "name": "ak",
+                                        "label": "Access Key Id",
+                                        "description": "iam access key id",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 50
+                                        }
+                                    },
+                                    {
+                                        "name": "sk",
+                                        "label": "Secret Access Key",
+                                        "description": "iam secret access key",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 50
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "parameters": []
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/deploy_iam_connection/1.0.53",
+                    "module_id": "devcloud2018.deploy_iam_connection.endponit",
+                    "description": "IAM user endpoint",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "deploy_iam_connection",
+                    "version": "1.0.53",
+                    "tags": [
+                        "kubernetes",
+                        "docker"
+                    ],
+                    "url_relative": "extensions/devcloud2018/deploy_iam_connection/1.0.53",
+                    "target": null,
+                    "categories": [
+                        "endpoint",
+                        "deploy"
+                    ]
+                },
+                {
+                    "id": 377199,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "Gerrit repository",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "Gerrit URL",
+                            "helpText": "Example: https://*.*.*.*/gerrit.",
+                            "value": ""
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection123",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Gerrit username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "helpText": "Gerrit Password.",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a Gerrit repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-gerrit-24/1.0.9",
+                    "module_id": "devcloud2018.codesource-gerrit-24.oauth07",
+                    "description": "Gerrit repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Gerrit repository",
+                    "version": "1.0.9",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-gerrit-24/1.0.9",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 418986,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "IngressTLS",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "Url",
+                            "hidden": true,
+                            "value": "https://iam.cn-north-7.ulanqab.huawei.com"
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection123",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-none",
+                                "scheme": "cert",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "publicKey",
+                                        "label": "Certificate file",
+                                        "helpText": "The certificate contains information such as the certificate's public key and signature，The certificate extension is “.crt” or “.pem”. The format of the content is : Start with “------ BEGIN CERTIFICATE ----” and end with “------ END CERTIFICATE ----”",
+                                        "description": "publicKey",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive",
+                                            "DevCloud.ControlType.Secret": true
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    },
+                                    {
+                                        "name": "privateKey",
+                                        "label": "Private Key",
+                                        "helpText": "The private key of the certificate, with a private key extension of “.crt” or “.pem”. You can directly enter the content of the private key file. The format of the content is : Start with “------ BEGIN RSA PRIVATE KEY ----” and end with “------ END RSA PRIVATE KEY ----”",
+                                        "description": "privateKey",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive",
+                                            "DevCloud.ControlType.Secret": true
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to store certificate information，You can use this endpoint the cluster network access configuration of the developer debugging service"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/jade-certificate-manager/1.0.39",
+                    "module_id": "devcloud2018.jade-certificate-manager.cert",
+                    "description": "IngressTLS",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "IngressTLS",
+                    "version": "1.0.39",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/jade-certificate-manager/1.0.39",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 463400,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "GitLab repository",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "GitLab URL",
+                            "value": "",
+                            "helpText": "Example: https://gitlab.com.",
+                            "validation": {
+                                "pattern": "^(http|https)://.*$",
+                                "patternDescription": "GitLab URL(https://gitlab.com)"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection",
+                                "endpointUrl": "{{endpoint.url}}/api/v4/users?username={{__auth_var__.username}}&private_token={{__auth_var__.password}}"
+                            },
+                            {
+                                "name": "GetRepos",
+                                "endpointUrl": "{{endpoint.url}}/api/v4/users/{{__auth_var__.username}}/projects?simple=true&private_token={{__auth_var__.password}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetBranch",
+                                "endpointUrl": "{{endpoint.url}}/api/v4/projects/{{repo_id}}/repository/branches?private_token={{__auth_var__.password}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Gitlab username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Access Token(The account must have the repository administrator permissions to configure trigger events.)",
+                                        "helpText": "Gitlab access token.",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a GitLab repository, which can be used in CodeArts pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-gitlab-37/1.0.18",
+                    "module_id": "devcloud2018.codesource-gitlab-37.oauth03",
+                    "description": "GitLab repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "GitLab repository",
+                    "version": "1.0.18",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-gitlab-37/1.0.18",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 468753,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "TFS Git repository",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "TFS Git Repository URL",
+                            "value": "",
+                            "helpText": "Example: http://url:8080/tfs/collectionname/teamname/_git/reponame.",
+                            "validation": {
+                                "pattern": "^(http|https)://.*$",
+                                "patternDescription": "TFS Git repository Url address only HTTPS cloning"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "GetRepos",
+                                "endpointUrl": "{{endpoint.url}}/cicd/v2/{{cloud_project_id}}/code/repositories?repoType={{repo_type}}&authEndpoint={{auth_endpoint}}&limit={{limit}}&offset={{offset}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetBranch",
+                                "endpointUrl": "{{endpoint.url}}/cicd/v2/{{cloud_project_id}}/code/branches?repoUrl={{repo_url}}&authEndpoint={{auth_endpoint}}&limit={{limit}}&offset={{offset}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "password",
+                                        "label": "Access Token",
+                                        "description": "password",
+                                        "helpText": "TFS access token.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a TFS repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-tfs/1.0.28",
+                    "module_id": "devcloud2018.codesource-authenticate-tfs.oauth07",
+                    "description": "TFS Git repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "TFS Git repository",
+                    "version": "1.0.28",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-tfs/1.0.28",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 470131,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "jmustache test",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "Git Repository URL",
+                            "helpText": "Example: https://xxx.com",
+                            "value": "",
+                            "validation": {
+                                "pattern": "^(http|https)://.*(:|/)(\\S+)/(\\S+)\\.git$",
+                                "patternDescription": "Git repository Url address only HTTPS cloning"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection1",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Enter the repository username",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password or Access Token",
+                                        "helpText": "Enter the repository password or access token",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a Git repository, which can be used in CloudPpeline, CloudBuild, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/jmustache-test/1.0.13",
+                    "module_id": "devcloud2018.jmustache-test.jmustache02",
+                    "description": "jmustache test",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "jmustache test",
+                    "version": "1.0.13",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/jmustache-test/1.0.13",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 470372,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "GitCode",
+                        "name": "gitcode-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "随便填什么",
+                            "value": "https://gitcode.com",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "aaa",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-token",
+                                "parameters": [
+                                    {
+                                        "name": "headerName",
+                                        "label": "headerName",
+                                        "description": "headerName",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Hidden"
+                                        },
+                                        "defaultValue": "private-token"
+                                    },
+                                    {
+                                        "name": "token",
+                                        "label": "Token(The account must have the repository administrator permissions to configure trigger events.)",
+                                        "helpText": "GitCode access token.",
+                                        "description": "Token",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a Git repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-gitcode/1.2.9",
+                    "module_id": "devcloud2018.codesource-authenticate-gitcode.oauth377",
+                    "description": "oauth gitcode",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "gitcode",
+                    "version": "1.2.9",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-gitcode/1.2.9",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 470892,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "Git repository",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "Git Repository URL",
+                            "value": "",
+                            "helpText": "",
+                            "validation": {
+                                "pattern": "^(http|https)://.*(:|/)(\\S+)/(\\S+)(\\.git|_git/\\S+)$",
+                                "patternDescription": "Git repository Url address only HTTPS cloning"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection1",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Git username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password or Access Token",
+                                        "helpText": "Git password or access token.",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a Git repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-generic/1.0.26",
+                    "module_id": "devcloud2018.codesource-authenticate-generic.oauth02",
+                    "description": "Git repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Git repository",
+                    "version": "1.0.26",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-generic/1.0.26",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 477459,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "Self-Managed GitLab repository",
+                        "name": "generic-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "Self-Managed GitLab URL",
+                            "helpText": "Example: https://*.*.*.*/user/repo.git.",
+                            "value": "",
+                            "validation": {
+                                "pattern": "^(http|https)://.*$",
+                                "patternDescription": "Self-Managed GitLab URL(https://*.*.*.*/user/repo.git)"
+                            }
+                        },
+                        "dataSources": [
+                            {
+                                "name": "GetRepos",
+                                "endpointUrl": "{{endpoint.url}}/api/v4/users/{{__auth_var__.username}}/projects?simple=true&private_token={{__auth_var__.password}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            },
+                            {
+                                "name": "GetBranch",
+                                "endpointUrl": "{{endpoint.url}}/api/v4/projects/{{repo_id}}/repository/branches?private_token={{__auth_var__.password}}",
+                                "resultSelector": "jsonpath:$[*]"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Gitlab username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Access Token",
+                                        "helpText": "Gitlab access token.",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a Self-Managed GitLab repository, which can be used in CodeArts pipeline, CodeArts Build, and other services."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-self-managed-gitlab-37/1.0.10",
+                    "module_id": "devcloud2018.codesource-self-managed-gitlab-37.oauth03",
+                    "description": "Self-Managed GitLab repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Self-Managed GitLab repository",
+                    "version": "1.0.10",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-self-managed-gitlab-37/1.0.10",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 480627,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "Bitbucket repository",
+                        "name": "bitbucket-git-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "bitbucket Url",
+                            "value": "https://gitee.com",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection1",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Bitbucket username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "helpText": "Bitbucket password",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "An endpoint used to connect to a bitbucket repository, which can be used in CodeArts Pipeline, CodeArts Build, and other services.<br>The username can be found at [Bitbucket profile settings -> Username] on the bitbucket personal settings page. [link](https://bitbucket.org/account/settings/)<br>The password can be created on bitbucket, make sure you have at least [Account->Read & Project->Read] permission [link](https://bitbucket.org/account/settings/app-passwords/)"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-authenticate-bitbucket/1.0.8",
+                    "module_id": "devcloud2018.codesource-authenticate-bitbucket.oauth02",
+                    "description": "Bitbucket repository",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Bitbucket repository",
+                    "version": "1.0.8",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-authenticate-bitbucket/1.0.8",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                },
+                {
+                    "id": 480631,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "AGC Endpoint",
+                        "name": "AGCEndpoint",
+                        "url": {
+                            "displayName": "Server URL",
+                            "value": "https://lfagccloudgwsdv01cn.hwcloudtest.cn",
+                            "hidden": true
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection123",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-none",
+                                "scheme": "AGC",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "client_id",
+                                        "label": "client_id",
+                                        "helpText": "client id",
+                                        "description": "client id",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "client_secret",
+                                        "label": "client_secret",
+                                        "helpText": "client secret",
+                                        "description": "client secret",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "Connect to AGC Connect API, Using it in pipelines. <br>1. Sign in to [AppGallery Connect](https://developer.huawei.com/consumer/en/service/josp/agc/index.html) and click Users and permissions. Go to API key > Connect API and click Create as you need. <br>2. After the client is successfully created, record the values of Client ID and Key in the client information list."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/agc_connection/1.0.5",
+                    "module_id": "devcloud2018.agc_connection.endpoint_oauth",
+                    "description": "Connect to AGC Connect API, Using it in pipelines.",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "AGCEndpoint",
+                    "version": "1.0.5",
+                    "tags": [
+                        "extend"
+                    ],
+                    "url_relative": "extensions/devcloud2018/agc_connection/1.0.5",
+                    "target": null,
+                    "categories": [
+                        "pipeline"
+                    ]
+                },
+                {
+                    "id": 480781,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "endponit",
+                        "displayName": "Kubernetes with CA",
+                        "url": {
+                            "displayName": "Kubernetes URL",
+                            "helpText": "Enter the cluster server address in the kubeconfig file. e.g. https://100.xxx.xxx.43:5443"
+                        },
+                        "dataSources": [
+                            {
+                                "name": "${__test_connection_key__}",
+                                "endpointUrl": "{{endpoint.url}}version",
+                                "resultSelector": "jsonpath:$.goVersion"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "id": "kubeconfig",
+                                "type": "endpoint-auth-scheme-k8s",
+                                "displayName": "KubeConfig",
+                                "scheme": "KubeConfig",
+                                "parameters": [
+                                    {
+                                        "name": "kubeconfig",
+                                        "label": "Kubeconfig",
+                                        "description": "Copy and paste contents of kubectl config",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "MultiLineText",
+                                            "DevCloud.ControlType.Secret": true
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    },
+                                    {
+                                        "name": "ca_crt",
+                                        "label": "CA证书",
+                                        "description": "Copy and paste contents of kubectl CAs",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "MultiLineText",
+                                            "DevCloud.ControlType.Secret": true
+                                        },
+                                        "validation": {
+                                            "isRequired": false,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "parameters": [],
+                        "helpText": "Connects to a Kubernetes cluster. Bind a public IP address to the cluster if your Deploy executor is from the official resource pool."
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/deploy_k8s_connection_with_ca/1.0.0",
+                    "module_id": "devcloud2018.deploy_k8s_connection_with_ca.endponit",
+                    "description": "deploy_k8s_connection_with_ca",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "deploy_k8s_connection_with_ca",
+                    "version": "1.0.0",
+                    "tags": [
+                        "kubernetes",
+                        "docker"
+                    ],
+                    "url_relative": "extensions/devcloud2018/deploy_k8s_connection_with_ca/1.0.0",
+                    "target": null,
+                    "categories": [
+                        "endpoint",
+                        "deploy"
+                    ]
+                },
+                {
+                    "id": 480800,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "name": "docker_command",
+                        "displayName": "Docker repository",
+                        "helpMarkdown": "An endpoint used to connect to a third-party Docker image repository.",
+                        "url": {
+                            "displayName": "Repository Address",
+                            "helpText": "Example: https://xxx.com",
+                            "value": "",
+                            "validation": {
+                                "pattern": "(((ht|f)tps?)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%:/~\\+#]*[\\w-@?^=%/~+#])?)|([\\w\\-]+(\\.[\\w\\-]+)+([\\w-.,@?^=%:/~+#]*[\\w-@?^=%/~+#])?)",
+                                "patternDescription": "Invalid address."
+                            }
+                        },
+                        "dataSources": [
+                            {}
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "Basic Authentication",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "Enter a repository username.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 256
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "helpText": "Enter the repository password.",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 102400
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/docker-command/1.0.242",
+                    "module_id": "devcloud2018.docker-command.deploy_docker",
+                    "description": "Run a Docker command on hosts. [View Guide](https://support.huaweicloud.com/en-us/usermanual-deployman/deployman_hlp_00048.html)",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "Run Docker Command",
+                    "version": "1.0.242",
+                    "tags": [
+                        "vm",
+                        "docker"
+                    ],
+                    "url_relative": "extensions/devcloud2018/docker-command/1.0.242",
+                    "target": null,
+                    "categories": [
+                        "deploy"
+                    ]
+                },
+                {
+                    "id": 480861,
+                    "type": "Endpoint",
+                    "location": "devcloud.open.endpoint",
+                    "properties": {
+                        "displayName": "CodeArts Repo HTTPS",
+                        "name": "codehub-https-pipeline-sourcecode",
+                        "url": {
+                            "displayName": "CodeArts Repo URL",
+                            "helpText": "HTTPS clone address, for example https://*.huaweicloud.com.",
+                            "value": ""
+                        },
+                        "dataSources": [
+                            {
+                                "name": "TestConnection123",
+                                "endpointUrl": "{{endpoint.url}}"
+                            }
+                        ],
+                        "authentication": [
+                            {
+                                "type": "endpoint-auth-scheme-basic",
+                                "scheme": "UsernamePassword",
+                                "displayName": "None",
+                                "parameters": [
+                                    {
+                                        "name": "username",
+                                        "label": "Username",
+                                        "helpText": "HTTPS username. The format is Tenant name/IAM username.",
+                                        "description": "Username for connecting to the endpoint",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "SingleLineText"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    },
+                                    {
+                                        "name": "password",
+                                        "label": "Password",
+                                        "helpText": "HTTPS password.",
+                                        "description": "password",
+                                        "displaySettings": {
+                                            "DevCloud.ControlType": "Sensitive"
+                                        },
+                                        "validation": {
+                                            "isRequired": true,
+                                            "dataType": "string",
+                                            "maxLength": 300
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "helpMarkdown": "Repo HTTPS password authorization can be used in Pipeline service to elevate the code library operation permission. Click your profile picture and choose 'This Account Settings > Repo > HTTPS Password' to view and set user password information.<br>[Learn more](https://support.huaweicloud.com/intl/en-us/usermanual-pipeline/pipeline_01_0011.html#section2)"
+                    },
+                    "properties_list": null,
+                    "manifest_version": "1",
+                    "baseUrl": "https://cn-north-6-wukong-prod.obs.cn-north-6.myhuaweicloud.com/extensions/devcloud2018/codesource-codehub-https-24/1.0.18",
+                    "module_id": "devcloud2018.codesource-codehub-https-24.oauth07",
+                    "description": "CodeArts Repo HTTPS",
+                    "productLine": null,
+                    "publisher": "devcloud2018",
+                    "name": "CodeArts Repo HTTPS",
+                    "version": "1.0.18",
+                    "tags": [
+                        "other"
+                    ],
+                    "url_relative": "extensions/devcloud2018/codesource-codehub-https-24/1.0.18",
+                    "target": null,
+                    "categories": [
+                        "devcloud.innerendpoint"
+                    ]
+                }
+            ],
+            "total": 20
+        }
+    },
+    "status": "success",
+    "error": null
+}
